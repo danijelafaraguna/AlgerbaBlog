@@ -1,21 +1,16 @@
 <?php
-
 namespace App\Models;
-
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
-
 class Post extends Model
 {
 	use Sluggable;
-	
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = ['title', 'content', 'user_id'];
-	
 	/**
      * Save new post
      *
@@ -26,7 +21,6 @@ class Post extends Model
 	{
 		return $this->create($data);
 	}
-	
 	/**
      * Update post
      *
@@ -37,7 +31,6 @@ class Post extends Model
 	{
 		$this->update($data);
 	}
-	
 	/**
      * Return the sluggable configuration array for this model.
      *
@@ -51,7 +44,6 @@ class Post extends Model
             ]
         ];
     }
-	
 	/**
      * Return the user relationship.
      *
@@ -60,5 +52,14 @@ class Post extends Model
 	public function user()
 	{
 		return $this->belongsTo('App\Models\User');
+	}
+	/**
+     * Return the post relationship.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+	public function comment()
+	{
+		return $this->hasMany('App\Models\Comment');
 	}
 }
