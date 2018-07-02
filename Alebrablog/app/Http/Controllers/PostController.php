@@ -110,7 +110,16 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
+     {
+        $post = Post::findOrFail($id);
+		
+		try{
+			$post->delete();
+		} catch(Exception $e) {
+			session()->flash('error', $e->getMessage());
+			return redirect()->back();
+		}
+		session()->flash('success', 'You have successfully deleted a post!');
+		return redirect()->route('posts.index');
     }
 }
