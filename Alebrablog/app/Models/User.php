@@ -1,9 +1,6 @@
 <?php
-
 namespace App\Models;
-
 use Cartalyst\Sentinel\Users\EloquentUser;
-
 class User extends EloquentUser
 {
     /**
@@ -15,4 +12,13 @@ class User extends EloquentUser
 	{
 		return $this->hasMany('App\Models\Post');
 	}
+	/**added 1.7. 23:46
+		 * Return the comment relationship.
+		 *
+		 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+		 */
+		 public function comment()
+	 {
+	     return $this->hasMany('App\Comment');
+	 }
 }
